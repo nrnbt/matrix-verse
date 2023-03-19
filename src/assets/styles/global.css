@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Open Sans', sans-serif;
+    @apply flex justify-center text-sm text-gray-800 leading-6;
+  }
+
+  button {
+    @apply outline-none focus:outline-none !important;
+  }
+}
+
+@layer components {
+
+  .square-ctn {
+    @apply relative w-full;
+    padding-bottom: 100%;
+  }
+
+  .square-ctn-inner {
+    @apply absolute w-full h-full flex items-center justify-center;
+  }
+
+  .with-vertical-divider {
+    @apply relative;
+  }
+  .with-vertical-divider::before {
+    content: '';
+    @apply h-full w-px left-1/2 absolute top-0 bg-gray-300;
+  }
+
+  .vertical-scroll {
+    @apply overflow-y-scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .vertical-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .horizontal-scroll {
+    @apply overflow-x-scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#__next {
+  @apply w-full
+}
+
+/* ::-webkit-scrollbar {
+  @apply hidden
+} */

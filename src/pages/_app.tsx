@@ -1,6 +1,15 @@
-import '@/styles/globals.css'
+import theme from '@/site-settings/theme/mui-theme'
+import { ThemeProvider } from '@mui/material'
 import type { AppProps } from 'next/app'
+import { FunctionComponent } from 'react'
+import '../assets/styles/global.css'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  )
 }
+
+export default App
