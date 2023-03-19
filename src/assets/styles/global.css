@@ -8,12 +8,13 @@
 @layer base {
   body {
     font-family: 'Open Sans', sans-serif;
-    @apply flex justify-center text-sm text-gray-800 leading-6;
+    @apply flex justify-center text-sm leading-6 bg-black overflow-hidden text-white;
   }
 
   button {
-    @apply outline-none focus:outline-none !important;
+    @apply outline-none bg-emerald-800 focus:outline-none !important;
   }
+
 }
 
 @layer components {
