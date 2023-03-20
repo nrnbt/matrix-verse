@@ -63,7 +63,7 @@ const ImagePage: FunctionComponent = () => {
               input: { color: COLORS.primary.dark }
             }}
           />
-          <div className='flex border-2'>
+          <div className='flex'>
             <IconButton
               className='w-16'
               disabled={loading}

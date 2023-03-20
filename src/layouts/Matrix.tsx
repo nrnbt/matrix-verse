@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 import Link from 'next/link'
 import React, { useRef, useEffect, FunctionComponent } from 'react'
 
-const MatrixRain: FunctionComponent = () => {
+const MatrixRain: FunctionComponent = ({ children }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -40,33 +40,12 @@ const MatrixRain: FunctionComponent = () => {
   }, [])
 
   return (
-    <div style={{ position: 'relative' }}>
+    <>
       <canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <div className='flex flex-col justify-center items-center gap-2 p-4'>
-          <Button
-            variant='contained'
-          >
-            <Link
-              href={{
-                pathname: '/chat'
-              }}
-            >chat
-            </Link>
-          </Button>
-          <Button
-            variant='contained'
-          >
-            <Link
-              href={{
-                pathname: '/image'
-              }}
-            >image
-            </Link>
-          </Button>
-        </div>
+        {children}
       </div>
-    </div>
+    </>
   )
 }
 

@@ -2,8 +2,8 @@
 import Head from 'next/head'
 // import Link from 'next/link'
 import { FunctionComponent } from 'react'
-import dynamic from 'next/dynamic'
-const MatrixRain = dynamic(async () => await import('@/components/page-components/Matrix'), { ssr: false })
+import { Button } from '@mui/material'
+import Link from 'next/link'
 
 const HomePage: FunctionComponent = () => {
   return (
@@ -14,7 +14,28 @@ const HomePage: FunctionComponent = () => {
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
-      <MatrixRain />
+      <div className='flex flex-col justify-center items-center gap-2 p-4'>
+        <Button
+          variant='contained'
+        >
+          <Link
+            href={{
+              pathname: '/chat'
+            }}
+          >chat
+          </Link>
+        </Button>
+        <Button
+          variant='contained'
+        >
+          <Link
+            href={{
+              pathname: '/image'
+            }}
+          >image
+          </Link>
+        </Button>
+      </div>
     </>
   )
 }

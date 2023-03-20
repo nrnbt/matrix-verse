@@ -17,7 +17,7 @@ const ChatPage: FunctionComponent = () => {
   const openai = new OpenAIApi(configuration)
 
   const handleClick = async (): Promise<void> => {
-    if (loading) {
+    if (loading || userMsg === '') {
       return
     }
     setUserMsg('')
@@ -39,13 +39,18 @@ const ChatPage: FunctionComponent = () => {
       <Head>
         <title>Chat GPT 3.5 turbo</title>
       </Head>
-      <div className='flex flex-col justify-center items-center h-screen overflow-y-auto gap-2 p-4'>
-        <div className='flex flex-col h-full w-full border-2 overflow-y-auto'>
-          {
-            messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
-              <p key={idx} className={cn('text-2xl pl-4 pt-4', msg.role === 'user' ? 'font-semibold' : 'font-bold')}>{msg.content}</p>
-            ))
-          }
+      <div className='flex flex-col justify-center items-center h-screen w-screen overflow-y-auto gap-2 p-4'>
+        <div className='flex flex-col h-full w-full border-2 overflow-y-auto rounded-xl'>
+          {messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
+            <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-start' : 'justify-end')}>
+              <p
+                className={cn('flex text-xl p-4 m-2 w-fit rounded-lg',
+                  msg.role === 'user' ? 'bg-gray-600 font-semibold' : 'text-end bg-emerald-800 font-bold'
+                )}
+              >{msg.content}
+              </p>
+            </div>
+          ))}
           {loading && <Loader />}
         </div>
         <div className='flex w-full gap-2'>
