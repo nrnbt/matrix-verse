@@ -6,6 +6,8 @@ import { FunctionComponent, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import cn from 'classnames'
 import { COLORS } from '@/site-settings/theme/color'
+import { Prism } from 'react-syntax-highlighter'
+import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const ChatPage: FunctionComponent = () => {
   const [messages, setMessages] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string, name?: string}>>([])
@@ -42,16 +44,33 @@ const ChatPage: FunctionComponent = () => {
       <div className='flex flex-col justify-center items-center h-screen w-screen overflow-y-auto gap-2 p-4'>
         <div className='flex flex-col h-full w-full border-2 overflow-y-auto rounded-xl'>
           {messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
-            <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-start' : 'justify-end')}>
+            <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
               <p
-                className={cn('flex text-xl p-4 m-2 w-fit rounded-lg',
-                  msg.role === 'user' ? 'bg-gray-600 font-semibold' : 'text-end bg-emerald-800 font-bold'
+                className={cn('flex flex-col text-xl p-4 m-2 w-fit rounded-lg',
+                  msg.role === 'user' ? 'bg-gray-600 font-semibold text-end' : 'max-w-6xl bg-emerald-800 font-bold'
                 )}
-              >{msg.content}
+              >
+                {
+                  msg.content.split(/(```[\s\S]*?```|`[\s\S]*?`)/).map((block, idx) => {
+                    if (block.startsWith('```')) {
+                      return (
+                        <Prism key={idx} language='jsx' style={darcula}>
+                          {block.slice(3, -3)}
+                        </Prism>
+                      )
+                    } else {
+                      return <div key={idx}>{block}</div>
+                    }
+                  })
+                }
               </p>
             </div>
           ))}
-          {loading && <Loader />}
+          {loading && (
+            <div className='flex bg-emerald-800 justify-start w-fit rounded-lg m-2'>
+              <Loader />
+            </div>
+          )}
         </div>
         <div className='flex w-full gap-2'>
           <TextField
@@ -65,7 +84,7 @@ const ChatPage: FunctionComponent = () => {
               e.keyCode === 13 && handleClick()
             }}
           />
-          <IconButton className='w-16' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
+          <IconButton className='w-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
         </div>
       </div>
     </>

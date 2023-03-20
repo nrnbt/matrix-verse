@@ -1,6 +1,4 @@
-// import { Button } from '@mui/material'
 import Head from 'next/head'
-// import Link from 'next/link'
 import { FunctionComponent } from 'react'
 import { Button } from '@mui/material'
 import Link from 'next/link'

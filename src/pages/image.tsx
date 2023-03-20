@@ -39,8 +39,8 @@ const ImagePage: FunctionComponent = () => {
       <Head>
         <title>Image GPT 3.5 turbo</title>
       </Head>
-      <div className='flex flex-col justify-center items-center h-screen overflow-y-auto gap-2 p-4'>
-        <div className='flex flex-col h-full w-full border-2 overflow-y-auto'>
+      <div className='flex flex-col justify-center items-center h-screen overflow-y-auto gap-2 p-4 w-screen'>
+        <div className='flex flex-col h-full w-full border-2 overflow-y-auto rounded-xl'>
           {!loading
             ? (
                 response !== undefined && response !== '' && (
@@ -65,7 +65,7 @@ const ImagePage: FunctionComponent = () => {
           />
           <div className='flex'>
             <IconButton
-              className='w-16'
+              className='w-16 rounded-full'
               disabled={loading}
               onClick={handleClick}
             >
