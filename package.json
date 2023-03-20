@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm i --force next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
     "@mui/styles": "^5.11.13",
@@ -22,16 +22,16 @@
     "multer": "^1.4.5-lts.1",
     "next": "13.2.4",
     "openai": "^3.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-matrix-effect": "^1.1.0",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.11.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
-    "@types/node": "^18.15.3",
-    "@types/react": "^18.0.28",
+    "@types/node": "^18.7.21",
+    "@types/react": "17.0.39",
     "@types/tailwindcss": "^3.1.0",
     "autoprefixer": "^10.4.14",
     "env-cmd": "^10.1.0",
