@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { Configuration, OpenAIApi } from 'openai'
 import { FunctionComponent, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
+import { COLORS } from '@/site-settings/theme/color'
 
 const ImagePage: FunctionComponent = () => {
   const [prompt, setPrompt] = useState('')
@@ -52,16 +53,19 @@ const ImagePage: FunctionComponent = () => {
         </div>
         <div className='flex w-full gap-2'>
           <TextField
-            label='Type something ...'
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className='w-full'
+            className='w-full rounded-lg'
             onKeyDown={(e) => {
               e.keyCode === 13 && handleClick()
+            }}
+            sx={{
+              input: { color: COLORS.primary.dark }
             }}
           />
           <div className='flex border-2'>
             <IconButton
+              className='w-16'
               disabled={loading}
               onClick={handleClick}
             >
