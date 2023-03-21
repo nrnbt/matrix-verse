@@ -65,7 +65,25 @@
   @apply hidden
 } */
 
-.neon-text {
+/* .neon-text {
   color: #0F0;
   text-shadow: 0 0 5px #0F0, 0 0 10px #0F0, 0 0 20px #0F0, 0 0 30px #0F0, 0 0 40px #0F0, 0 0 50px #0F0, 0 0 60px #0F0;
+} */
+
+.neon-text {
+  color: #0F0;
+			font-size: 5em;
+			text-align: center;
+			text-shadow: 0 0 10px #0F0, 0 0 20px #0F0, 0 0 30px #0F0, 0 0 40px #0F0, 0 0 50px #0F0, 0 0 60px #0F0, 0 0 70px #0F0;
+			animation: glow 1s ease-in-out infinite alternate;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(45deg, #1a1a1a, #000);
+}
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #0F0, 0 0 20px #0F0, 0 0 30px #0F0, 0 0 40px #0F0, 0 0 50px #0F0, 0 0 60px #0F0, 0 0 70px #0F0;
+  }
+  to {
+    text-shadow: 0 0 20px #0F0, 0 0 30px #0F0, 0 0 40px #0F0, 0 0 50px #0F0, 0 0 60px #0F0, 0 0 70px #0F0, 0 0 80px #0F0;
+  }
 }

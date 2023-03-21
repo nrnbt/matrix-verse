@@ -7,7 +7,6 @@ import SendIcon from '@mui/icons-material/Send'
 import cn from 'classnames'
 import { COLORS } from '@/site-settings/theme/color'
 import { Prism } from 'react-syntax-highlighter'
-import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const ChatPage: FunctionComponent = () => {
   const [messages, setMessages] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string, name?: string}>>([])
@@ -46,15 +45,17 @@ const ChatPage: FunctionComponent = () => {
           {messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
             <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
               <p
-                className={cn('flex flex-col text-xl p-4 m-2 w-fit rounded-lg',
-                  msg.role === 'user' ? 'bg-gray-600 font-semibold text-end' : 'max-w-6xl bg-emerald-800 font-bold'
+                className={cn('flex flex-col text-xl p-4 m-7 w-fit rounded-lg max-w-7xl',
+                  msg.role === 'user' ? 'bg-gray-600 font-semibold text-end' : 'bg-emerald-800 font-bold'
                 )}
               >
                 {
                   msg.content.split(/(```[\s\S]*?```|`[\s\S]*?`)/).map((block, idx) => {
-                    if (block.startsWith('```')) {
+                    if (block.match('/`[^`]*[^`]`') != null) {
+                      return <pre key={idx}><code className='font-bold'>{block}</code></pre>
+                    } else if (block.startsWith('```')) {
                       return (
-                        <Prism key={idx} language='jsx' style={darcula}>
+                        <Prism key={idx} language='jsx'>
                           {block.slice(3, -3)}
                         </Prism>
                       )
@@ -67,8 +68,8 @@ const ChatPage: FunctionComponent = () => {
             </div>
           ))}
           {loading && (
-            <div className='flex bg-emerald-800 justify-start w-fit rounded-lg m-2'>
-              <Loader />
+            <div className='flex bg-emerald-800 justify-start w-fit rounded-lg m-7'>
+              <Loader size='small' />
             </div>
           )}
         </div>
