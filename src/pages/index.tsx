@@ -12,28 +12,6 @@ const HomePage: FunctionComponent = () => {
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
-      <div className='flex flex-col justify-center items-center gap-2 p-4'>
-        <Button
-          variant='contained'
-        >
-          <Link
-            href={{
-              pathname: '/chat'
-            }}
-          >chat
-          </Link>
-        </Button>
-        <Button
-          variant='contained'
-        >
-          <Link
-            href={{
-              pathname: '/image'
-            }}
-          >image
-          </Link>
-        </Button>
-      </div>
     </>
   )
 }
