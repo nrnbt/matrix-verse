@@ -5,11 +5,12 @@ import { Configuration, OpenAIApi } from 'openai'
 import { FunctionComponent, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { COLORS } from '@/site-settings/theme/color'
+import cn from 'classnames'
 
 const ImagePage: FunctionComponent = () => {
-  const [prompt, setPrompt] = useState('')
+  const [newPrompt, setNewPrompt] = useState('')
   const [loading, setLoading] = useState(false)
-  const [response, setResponse] = useState < String | undefined >('')
+  const [content, setContent] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string | undefined }>>([])
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
   })
@@ -19,42 +20,56 @@ const ImagePage: FunctionComponent = () => {
     if (loading) {
       return
     }
-    setPrompt('')
     setLoading(true)
+    content.push({ role: 'user', content: newPrompt })
     await openai.createImage({
       size: '1024x1024',
       n: 1,
-      prompt,
+      prompt: newPrompt,
       response_format: 'url'
     })
       .then(({ data }) => {
-        setResponse(data?.data[0].url)
+        content.push({ role: 'assistant', content: data?.data[0].url })
       })
       .catch(e => console.error(e))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setNewPrompt('')
+      })
   }
+
+  console.log(content)
 
   return (
     <>
       <Head>
         <title>Image GPT 3.5 turbo</title>
       </Head>
-      <div className='flex flex-col justify-center items-center h-screen overflow-y-auto gap-2 p-4 w-screen'>
-        <div className='flex flex-col h-full w-full border-2 overflow-y-auto rounded-xl'>
-          {!loading
-            ? (
-                response !== undefined && response !== '' && (
-                  <img src={response.toString()} alt={prompt} className='w-96' />
-                )
-              )
-            : (
-              <Loader />
-              )}
+      <div className='flex flex-col h-full justify-center items-center w-screen gap-2 p-4'>
+        <div className='flex flex-col w-full h-full border-2 overflow-y-auto rounded-xl'>
+          {content.length > 0 && content.map((con, idx) => (
+            <div key={idx} className={cn('flex', con.role === 'user' ? 'justify-end' : 'justify-start')}>
+              {con.role === 'user'
+                ? (
+                  <p className='flex flex-col text-xl p-4 m-4 w-fit h-fit rounded-lg max-w-7xl bg-gray-600 font-semibold text-end'>{con.content}</p>
+                  )
+                : (
+                  <div className='flex border m-4'>
+                    <img src={con.content} className='w-96' />
+                  </div>
+                  )}
+            </div>
+          ))}
+          {loading && (
+            <div className='flex bg-emerald-800 justify-start w-fit rounded-lg m-7'>
+              <Loader size='small' />
+            </div>
+          )}
         </div>
         <div className='flex w-full gap-2'>
           <TextField
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
+            value={newPrompt}
+            onChange={(e) => setNewPrompt(e.target.value)}
             className='w-full rounded-lg'
             onKeyDown={(e) => {
               e.keyCode === 13 && handleClick()

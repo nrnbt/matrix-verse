@@ -1,5 +1,6 @@
 import Navigations from '@/components/page-components/Navigations'
 import cn from 'classnames'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FunctionComponent, useEffect, useRef } from 'react'
 
@@ -42,26 +43,34 @@ const MatrixRain: FunctionComponent = ({ children }) => {
   }, [])
 
   return (
-    <div className='flex flex-col items-center min-h-full relative'>
-      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
-      {router.pathname !== '/matrix' && (
-        <>
-      <div className='w-full sticky top-0 z-20 mb-4'>
-        {router.pathname !== '/' && (
-          <div className='flex items-center bg-dark-transparent px-10 py-2 gap-10 w-full'>
-            <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
-            <Navigations className='flex gap-10 justify-end m-2' />
-          </div>
+    <>
+      <Head>
+        <meta charSet='UTF-8' />
+        <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='shortcut icon' href='/icons/gpt-icon.png' />
+      </Head>
+      <div className='flex flex-col items-center min-h-full relative'>
+        <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
+        {router.pathname !== '/matrix' && (
+          <>
+            {router.pathname !== '/' && (
+              <div className='w-full sticky top-0 z-20 mb-4'>
+                <div className='flex items-center bg-dark-transparent px-10 py-2 gap-10 w-full'>
+                  <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
+                  <Navigations className='flex gap-10 justify-end m-2' />
+                </div>
+              </div>
+            )}
+            <div className={cn('absolute h-screen pt-20 flex justify-center items-center w-full')}>
+              <div className='flex-1 w-full h-full'>
+                {children}
+              </div>
+            </div>
+          </>
         )}
       </div>
-      <div className={cn('absolute h-screen pt-20 flex justify-center items-center w-full')}>
-        <div className='flex-1 w-full h-full'>
-          {children}
-        </div>
-      </div>
-      </>
-      )}
-      </div>
+    </>
   )
 }
 
