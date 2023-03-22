@@ -13,8 +13,10 @@ const ChatPage: FunctionComponent = () => {
   const [messages, setMessages] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string, name?: string}>>([])
   const [userMsg, setUserMsg] = useState('')
   const [loading, setLoading] = useState(false)
+  const apiKey = process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
+  console.log(apiKey)
   const configuration = new Configuration({
-    apiKey: process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
+    apiKey
   })
   const openai = new OpenAIApi(configuration)
   const mobileLayout = useMediaQuery(theme.breakpoints.down('md'))
