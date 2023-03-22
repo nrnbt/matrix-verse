@@ -79,7 +79,7 @@ const ChatPage: FunctionComponent = () => {
           <TextField
             value={userMsg}
             onChange={(e) => setUserMsg(e.target.value)}
-            className='w-full rounded-lg'
+            className='w-full h-fit rounded-lg'
             size={mobileLayout ? 'small' : 'medium'}
             sx={{
               input: { color: COLORS.primary.dark }

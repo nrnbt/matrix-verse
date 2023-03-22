@@ -70,7 +70,7 @@ const ImagePage: FunctionComponent = () => {
           <TextField
             value={newPrompt}
             onChange={(e) => setNewPrompt(e.target.value)}
-            className='w-full h-full rounded-lg'
+            className='w-full h-fit rounded-lg'
             onKeyDown={(e) => {
               e.keyCode === 13 && handleClick()
             }}
