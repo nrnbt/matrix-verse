@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent } from 'react'
 
 const Matrix: FunctionComponent = () => {
-  return(<></>)
+  return (<></>)
 }
 
 export default Matrix

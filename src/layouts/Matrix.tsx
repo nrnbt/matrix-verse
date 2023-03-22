@@ -42,26 +42,26 @@ const MatrixRain: FunctionComponent = ({ children }) => {
   }, [])
 
   return (
-    <div className='flex flex-col items-center h-screen relative'>
-      <canvas ref={canvasRef} style={{ position: 'static', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
+    <div className='flex flex-col items-center min-h-full relative'>
+      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
       {router.pathname !== '/matrix' && (
-        <div className='absolute flex flex-col justify-center items-center h-full w-full'>
-          <div className='static flex flex-col h-full '>
-            {router.pathname !== '/' && (
-              <div className='flex items-center bg-dark-transparent px-10 py-2 gap-10 w-screen' onClick={() => console.log('you clicked')}>
-                <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
-                <Navigations className='flex gap-10 justify-end m-2' />
-              </div>
-            )}
-            <div className={cn('flex bottom-0 pt-20 h-full justify-center items-center w-full')}>
-              <div className='flex justify-center items-center h-full w-full'>
-                {children}
-              </div>
-            </div>
+        <>
+      <div className='w-full sticky top-0 z-20 mb-4'>
+        {router.pathname !== '/' && (
+          <div className='flex items-center bg-dark-transparent px-10 py-2 gap-10 w-full'>
+            <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
+            <Navigations className='flex gap-10 justify-end m-2' />
           </div>
+        )}
+      </div>
+      <div className={cn('absolute h-screen pt-20 flex justify-center items-center w-full')}>
+        <div className='flex-1 w-full h-full'>
+          {children}
         </div>
+      </div>
+      </>
       )}
-    </div>
+      </div>
   )
 }
 

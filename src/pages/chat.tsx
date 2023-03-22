@@ -40,7 +40,7 @@ const ChatPage: FunctionComponent = () => {
       <Head>
         <title>Chat GPT 3.5 turbo</title>
       </Head>
-      <div className='flex flex-col h-full justify-center items-center overflow-y-auto w-screen gap-2 p-4'>
+      <div className='flex flex-col h-full justify-center items-center w-screen gap-2 p-4'>
         <div className='flex flex-col w-full h-full border-2 overflow-y-auto rounded-xl'>
           {messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
             <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
