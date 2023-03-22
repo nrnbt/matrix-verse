@@ -1,4 +1,6 @@
 import Navigations from '@/components/page-components/Navigations'
+import theme from '@/site-settings/theme/mui-theme'
+import { useMediaQuery } from '@mui/material'
 import cn from 'classnames'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -7,6 +9,7 @@ import { FunctionComponent, useEffect, useRef } from 'react'
 const MatrixRain: FunctionComponent = ({ children }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const router = useRouter()
+  const mobileLayout = useMediaQuery(theme.breakpoints.down('md'))
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -50,26 +53,51 @@ const MatrixRain: FunctionComponent = ({ children }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <link rel='shortcut icon' href='/icons/gpt-icon.png' />
       </Head>
-      <div className='flex flex-col items-center min-h-full relative'>
-        <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
-        {router.pathname !== '/matrix' && (
-          <>
-            {router.pathname !== '/' && (
-              <div className='w-full sticky top-0 z-20 mb-4'>
-                <div className='flex items-center bg-dark-transparent px-10 py-2 gap-4 lg:gap-10 w-full'>
-                  <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
-                  <Navigations className='flex gap-4 lg:gap-10 justify-end m-2' />
+      {!mobileLayout
+        ? (
+          <div className='flex flex-col items-center min-h-full relative'>
+            <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
+            {router.pathname !== '/matrix' && (
+              <>
+                {router.pathname !== '/' && (
+                  <div className='w-full sticky top-0 z-20 mb-4'>
+                    <div className='flex items-center bg-dark-transparent px-10 py-2 gap-4 w-full'>
+                      <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
+                      <Navigations className='flex gap-4 justify-end m-2' />
+                    </div>
+                  </div>
+                )}
+                <div className={cn('absolute h-screen pt-20 flex justify-center items-center w-full')}>
+                  <div className='flex-1 w-full h-full'>
+                    {children}
+                  </div>
                 </div>
-              </div>
+              </>
             )}
-            <div className={cn('absolute h-screen pt-20 flex justify-center items-center w-full')}>
-              <div className='flex-1 w-full h-full'>
-                {children}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+          )
+        : (
+          <div className='flex flex-col h-screen w-screen relative'>
+            <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} width={window.innerWidth} height={window.innerHeight} />
+            {router.pathname !== '/matrix' && (
+              <>
+                {router.pathname !== '/' && (
+                  <div className='w-full sticky z-20 transform duration-200 top-0'>
+                    <div className='flex items-center bg-dark-transparent px-10 py-2 gap-4 w-full'>
+                      <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
+                      <Navigations className='flex gap-4 justify-end m-2' />
+                    </div>
+                  </div>
+                )}
+                <div className='absolute h-screen pt-20 mb-18 w-full overflow-x-hidden overflow-y-auto'>
+                  <div className='flex flex-col h-full w-full'>
+                    {children}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+          )}
     </>
   )
 }
