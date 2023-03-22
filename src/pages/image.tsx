@@ -13,9 +13,8 @@ const ImagePage: FunctionComponent = () => {
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string | undefined }>>([])
   const mobileLayout = useMediaQuery(theme.breakpoints.down('md'))
-  const apiKey = process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
   const configuration = new Configuration({
-    apiKey
+    apiKey: process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
   })
   const openai = new OpenAIApi(configuration)
 
