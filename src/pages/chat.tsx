@@ -40,12 +40,12 @@ const ChatPage: FunctionComponent = () => {
       <Head>
         <title>Chat GPT 3.5 turbo</title>
       </Head>
-      <div className='flex flex-col justify-center items-center h-screen w-screen overflow-y-auto gap-2 p-4'>
-        <div className='flex flex-col h-full w-full border-2 overflow-y-auto rounded-xl'>
+      <div className='flex flex-col h-full justify-center items-center overflow-y-auto w-screen gap-2 p-4'>
+        <div className='flex flex-col w-full h-full border-2 overflow-y-auto rounded-xl'>
           {messages !== undefined && messages.length > 0 && messages.map((msg, idx) => (
             <div key={idx} className={cn('flex', msg.role === 'user' ? 'justify-end' : 'justify-start')}>
               <p
-                className={cn('flex flex-col text-xl p-4 m-7 w-fit rounded-lg max-w-7xl',
+                className={cn('flex flex-col text-xl p-4 m-7 w-fit h-fit rounded-lg max-w-7xl',
                   msg.role === 'user' ? 'bg-gray-600 font-semibold text-end' : 'bg-emerald-800 font-bold'
                 )}
               >
@@ -73,11 +73,11 @@ const ChatPage: FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div className='flex w-full gap-2'>
+        <div className='flex w-full h-16 gap-2'>
           <TextField
             value={userMsg}
             onChange={(e) => setUserMsg(e.target.value)}
-            className='w-full rounded-lg'
+            className='w-full h-16 rounded-lg'
             sx={{
               input: { color: COLORS.primary.dark }
             }}
@@ -85,7 +85,7 @@ const ChatPage: FunctionComponent = () => {
               e.keyCode === 13 && handleClick()
             }}
           />
-          <IconButton className='w-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
+          <IconButton className='w-16 h-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
         </div>
       </div>
     </>
