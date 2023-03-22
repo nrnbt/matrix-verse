@@ -77,7 +77,7 @@ const ChatPage: FunctionComponent = () => {
           <TextField
             value={userMsg}
             onChange={(e) => setUserMsg(e.target.value)}
-            className='w-full h-16 rounded-lg'
+            className='w-full rounded-lg'
             sx={{
               input: { color: COLORS.primary.dark }
             }}

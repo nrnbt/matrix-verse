@@ -56,9 +56,9 @@ const MatrixRain: FunctionComponent = ({ children }) => {
           <>
             {router.pathname !== '/' && (
               <div className='w-full sticky top-0 z-20 mb-4'>
-                <div className='flex items-center bg-dark-transparent px-10 py-2 gap-10 w-full'>
+                <div className='flex items-center bg-dark-transparent px-10 py-2 gap-4 lg:gap-10 w-full'>
                   <img className='h-10 w-10' src='/icons/gpt-icon.png' alt='gpt-icon' />
-                  <Navigations className='flex gap-10 justify-end m-2' />
+                  <Navigations className='flex gap-4 lg:gap-10 justify-end m-2' />
                 </div>
               </div>
             )}
