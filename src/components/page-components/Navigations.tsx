@@ -26,7 +26,7 @@ const Navigations: FunctionComponent<Props> = ({ className }) => {
       )}
       <Button
         variant='contained'
-        className='neon-text'
+        className={router.pathname === '/chat' ? '' : 'neon-text'}
       >
         <Link
           href={{
@@ -37,7 +37,7 @@ const Navigations: FunctionComponent<Props> = ({ className }) => {
       </Button>
       <Button
         variant='contained'
-        className='neon-text '
+        className={router.pathname === '/image' ? '' : 'neon-text'}
       >
         <Link
           href={{
