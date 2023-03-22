@@ -81,7 +81,7 @@ const ImagePage: FunctionComponent = () => {
           />
           <div className='flex'>
             <IconButton
-              className='w-11 h-11 md:w-16 md:h-16 rounded-full'
+              className={mobileLayout ? 'w-11 h-11 rounded-full' : 'w-16 h-16 rounded-full'}
               disabled={loading}
               onClick={handleClick}
             >

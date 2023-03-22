@@ -88,7 +88,7 @@ const ChatPage: FunctionComponent = () => {
               e.keyCode === 13 && handleClick()
             }}
           />
-          <IconButton className='w-11 h-11 md:w-16 md:h-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
+          <IconButton className={mobileLayout ? 'w-11 h-11 rounded-full' : 'w-16 h-16 rounded-full'} onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
         </div>
       </div>
     </>
