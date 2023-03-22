@@ -1,16 +1,18 @@
 import Loader, { ButtonLoader } from '@/components/ui-components/Loader'
-import { IconButton, TextField } from '@mui/material'
+import { IconButton, TextField, useMediaQuery } from '@mui/material'
 import Head from 'next/head'
 import { Configuration, OpenAIApi } from 'openai'
 import { FunctionComponent, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { COLORS } from '@/site-settings/theme/color'
 import cn from 'classnames'
+import theme from '@/site-settings/theme/mui-theme'
 
 const ImagePage: FunctionComponent = () => {
   const [newPrompt, setNewPrompt] = useState('')
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string | undefined }>>([])
+  const mobileLayout = useMediaQuery(theme.breakpoints.down('md'))
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
   })
@@ -37,8 +39,6 @@ const ImagePage: FunctionComponent = () => {
         setNewPrompt('')
       })
   }
-
-  console.log(content)
 
   return (
     <>
@@ -74,13 +74,14 @@ const ImagePage: FunctionComponent = () => {
             onKeyDown={(e) => {
               e.keyCode === 13 && handleClick()
             }}
+            size={mobileLayout ? 'small' : 'medium'}
             sx={{
               input: { color: COLORS.primary.dark }
             }}
           />
           <div className='flex'>
             <IconButton
-              className='w-16 rounded-full'
+              className='w-11 h-11 lg:w-16 lg:h-16 rounded-full'
               disabled={loading}
               onClick={handleClick}
             >

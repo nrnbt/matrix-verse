@@ -1,5 +1,5 @@
 import Loader, { ButtonLoader } from '@/components/ui-components/Loader'
-import { IconButton, TextField } from '@mui/material'
+import { IconButton, TextField, useMediaQuery } from '@mui/material'
 import Head from 'next/head'
 import { Configuration, OpenAIApi } from 'openai'
 import { FunctionComponent, useState } from 'react'
@@ -7,6 +7,7 @@ import SendIcon from '@mui/icons-material/Send'
 import cn from 'classnames'
 import { COLORS } from '@/site-settings/theme/color'
 import { Prism } from 'react-syntax-highlighter'
+import theme from '@/site-settings/theme/mui-theme'
 
 const ChatPage: FunctionComponent = () => {
   const [messages, setMessages] = useState<Array<{role: 'system' | 'user' | 'assistant', content: string, name?: string}>>([])
@@ -16,6 +17,7 @@ const ChatPage: FunctionComponent = () => {
     apiKey: process.env.NEXT_PUBLIC_OPEN_AI_SECRET_KEY
   })
   const openai = new OpenAIApi(configuration)
+  const mobileLayout = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleClick = async (): Promise<void> => {
     if (loading || userMsg === '') {
@@ -73,11 +75,12 @@ const ChatPage: FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div className='flex w-full h-16 gap-2'>
+        <div className='flex w-full gap-2'>
           <TextField
             value={userMsg}
             onChange={(e) => setUserMsg(e.target.value)}
             className='w-full rounded-lg'
+            size={mobileLayout ? 'small' : 'medium'}
             sx={{
               input: { color: COLORS.primary.dark }
             }}
@@ -85,7 +88,7 @@ const ChatPage: FunctionComponent = () => {
               e.keyCode === 13 && handleClick()
             }}
           />
-          <IconButton className='w-16 h-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
+          <IconButton className='w-11 h-11 lg:w-16 lg:h-16 rounded-full' onClick={handleClick}>{loading ? <ButtonLoader /> : <SendIcon />}</IconButton>
         </div>
       </div>
     </>
