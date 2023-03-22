@@ -81,7 +81,7 @@ const ImagePage: FunctionComponent = () => {
           />
           <div className='flex'>
             <IconButton
-              className='w-11 h-11 lg:w-16 lg:h-16 rounded-full'
+              className='w-11 h-11 md:w-16 md:h-16 rounded-full'
               disabled={loading}
               onClick={handleClick}
             >
