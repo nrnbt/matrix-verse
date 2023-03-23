@@ -24,6 +24,7 @@ const ImagePage: FunctionComponent = () => {
     }
     setLoading(true)
     content.push({ role: 'user', content: newPrompt })
+    setNewPrompt('')
     await openai.createImage({
       size: '1024x1024',
       n: 1,
@@ -36,7 +37,6 @@ const ImagePage: FunctionComponent = () => {
       .catch(e => console.error(e))
       .finally(() => {
         setLoading(false)
-        setNewPrompt('')
       })
   }
 
